@@ -21,10 +21,10 @@ Dataspace is reported by the compiler.
 
 To compress whole mdv2_ and create foo_zip in ram1_  
 ex zip;'-rb ram1_ ram1_foo mdv2_'  
- `r' = recursive  
- `b' = temporary dir ram1_   
+-r = recursive  
+-b = temporary dir ram1_   
 
 To compress all BASIC files in mdv2_, and create foo_zip in ram2_  
 ex zip;'-jb ram1_ ram2_foo mdv2_*bas'  
- `j' = junk path names, mdv2_...  
+-j = junk path names, mdv2_...  
 
