@@ -1,0 +1,43 @@
+CRYPTO =
+CLOAK =
+CRFLAG =
+CC = wcc386
+BIND = wlink
+CFLAGS = -DEXPORT -mf -bt=nt -DMSDOS -DWIN32 -DQDOS
+CFLAGS1 = -DEXPORTD-DUTIL
+LFLAGS1 = op st=20000
+LFLAGS2 = 
+E = .exe
+
+.c.obj: .AUTODEPEND
+    $(CC)  $(CFLAGS) $[*
+
+all: qzip.exe
+
+OBJZ = zip.obj zipfile.obj zipup.obj fileio.obj util.obj globals.obj $(CRYPTO)
+OBJI =  deflate.obj trees.obj bits.obj
+
+LOBJZ = zip.obj,zipfile.obj,zipup.obj,fileio.obj,util.obj,globals.obj, \
+ deflate.obj,trees.obj,bits.obj,c:\watcom\lib386\wildargv.obj
+
+OBJA =
+OBJU = zipfile_.obj zipup_.obj fileio_.obj util_.obj globals.obj
+OBJN = zipnote.obj  $(OBJU)
+OBJC = zipcloak.obj $(OBJU) crypt_.obj
+OBJS = zipsplit.obj $(OBJU)
+
+#$(OBJZ) : zip.h ziperr.h tailor.h
+
+
+qzip$E: $(OBJZ) $(OBJI) $(OBJA)
+	$(BIND) system nt name qzip$E $(LFLAGS1) file $(LOBJZ)
+
+zipnote$E: $(OBJN)
+	$(BIND) -o zipnote$E $(LFLAGS1) $(OBJN) $(LFLAGS2)
+zipcloak$E: $(OBJC)
+	$(BIND) -o zipcloak$E $(LFLAGS1) $(OBJC) $(LFLAGS2)
+zipsplit$E: $(OBJS)
+	$(BIND) -o zipsplit$E $(LFLAGS1) $(OBJS) $(LFLAGS2)
+clean:
+	-delete #?.obj
+
